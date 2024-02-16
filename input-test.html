@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INPUT TEST</title>
+
+    <style>
+        #player {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            /* transition: top .02s ease; */
+            /* transition: left .02s ease; */
+        }
+
+        img{
+            width: 50px;
+        }
+        .subtle {
+            color: rgb(168, 168, 168);
+        }
+    </style>
+</head>
+<body>
+    <p class="subtle">(press the arrow keys)</p>
+    <div id="player">
+        <img src="images/steve.png" id="player">
+    </div>
+
+    <script>
+
+        let player = document.getElementById("player");
+
+        let currentPositionTop = player.offsetTop;
+        console.log("Default position top = "+currentPositionTop);
+
+        let currentPositionLeft = player.offsetLeft;
+        console.log("Default position left = "+currentPositionLeft);
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.keyCode === 38) {
+                console.log("Up Arrow");
+                currentPositionTop -= 10;
+                player.style.top = currentPositionTop+"px";
+                // movePlayerUp(player);
+            }
+            if (event.keyCode === 40) {
+                console.log("Down Arrow");
+                currentPositionTop += 10;
+                player.style.top = currentPositionTop+"px";
+            }
+            if (event.keyCode === 39) {
+                console.log("Right Arrow");
+                currentPositionLeft += 10;
+                player.style.left = currentPositionLeft+"px";
+            }
+            if (event.keyCode === 37) {
+                console.log("Left Arrow");
+                currentPositionLeft -= 10;
+                player.style.left = currentPositionLeft+"px";
+            }
+        });
+
+        function movePlayerUp(domObject)
+        {
+            console.log("MOVED UP!!");
+            domObject.style.top = 100+"px";
+        }
+
+
+    </script>
+</body>
+</html>
