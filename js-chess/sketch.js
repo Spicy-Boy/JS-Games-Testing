@@ -5,6 +5,10 @@ let tileSize;
 
 //vvv array containing the tile data as strings
 let chessBoard = initializeBoard(columns, rows);
+
+//TESTER vvv
+// console.log(chessBoard);
+
 /* KEY:
 //WHITE is lowercase letters
 white pawn = p
@@ -68,11 +72,11 @@ function drawChessBoard()
         for (let j = 0; j < rows; j++)
         {
             //vvv x and y coordinates of current tile            
-            rectX = i*tileSize;
-            rectY = j*tileSize;
+            rectX = j*tileSize;
+            rectY = i*tileSize;
 
             //if mouse is hovering over tile, highlight tile black!
-            if (isMouseTile(rectX, rectY, tileSize, tileSize))
+            if (isMouseOverTile(rectX, rectY, tileSize, tileSize))
             {
                 fill(0);
             }
@@ -83,12 +87,26 @@ function drawChessBoard()
             //draw the tile square
             rect(rectX, rectY, tileSize, tileSize);
 
+            //draw the pieces associated with the current tile coordinate
             fill(235, 52, 52);
             textSize(tileSize+10);
             textAlign(CENTER);
             // vertAlign(CENTER);
 
-            text("X", rectX, rectY, tileSize); //, tileSize, tileSize);
+            //X means empty tile, draw nothing!
+            if (chessBoard[i][j] == "X")
+            {
+                // text("", rectX, rectY, tileSize); //, tileSize, tileSize);
+            }
+            else 
+            {
+                text(chessBoard[i][j], rectX, rectY, tileSize); //, tileSize, tileSize);
+
+                //DEBUG prints coords of each tile
+                // textSize(tileSize/2);
+                // text(i+" "+j, rectX, rectY, tileSize);
+            }
+
             
         }
     }
@@ -96,7 +114,7 @@ function drawChessBoard()
 
 //rx is rectangle x coord, ry = rectangle y coord, rw = width, rh = height
 //checks to see if mouse is hovering over the tile coordinates specified in parameters
-function isMouseTile (rx, ry, rw, rh)
+function isMouseOverTile (rx, ry, rw, rh)
 {
     if (mouseX > rx && mouseX < rx+rw && mouseY > ry && mouseY < ry+rh)
     {
