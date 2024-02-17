@@ -25,7 +25,7 @@ function initializeBoard (height, length)
     // let FENtoParse = initialFEN;
 
     //TEST FEN!!!
-    let FENtoParse = "rn1q1rk1/pbpnbppp/1p2p3/3p2B1/Q2P4/2PBPN2/PP1N1PPP/R3K2R";
+    let FENtoParse = "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R";
 
     for (let i = 0; i < boardHeight; i++)
     {
@@ -74,6 +74,11 @@ function initializeBoard (height, length)
                 row.push("♔");
                 indexOfFENTraversal++;
             }
+            else if (FENtoParse[indexOfFENTraversal] == "p")
+            {
+                row.push("♙");
+                indexOfFENTraversal++;
+            }
             //BLACK
             else if (FENtoParse[indexOfFENTraversal] == "R")
             {
@@ -98,6 +103,11 @@ function initializeBoard (height, length)
             else if (FENtoParse[indexOfFENTraversal] == "K")
             {
                 row.push("♚");
+                indexOfFENTraversal++;
+            }
+            else if (FENtoParse[indexOfFENTraversal] == "P")
+            {
+                row.push("♟︎");
                 indexOfFENTraversal++;
             }
             //isNaN stands for "Is Not a Number"
