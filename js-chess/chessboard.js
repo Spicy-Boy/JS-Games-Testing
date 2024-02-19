@@ -25,7 +25,7 @@ function Chessboard (length, height)
     // let FENtoParse = initialFEN;
 
     //TEST FEN!!!
-    let FENtoParse = "PPPPPPPP/pp1ppQQQ/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R";
+    let FENtoParse = "PPPPPPPP/pp1ppQQQ/8/2p5/6P1/5N2/PPPP1PPP/RNBQKB1R";
 
     for (let i = 0; i < boardHeight; i++)
     {

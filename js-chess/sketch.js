@@ -1,10 +1,10 @@
 //initialize size and shape of board
-let columns = 8;
-let rows = 8;
+let length = 8;
+let height = 8;
 let tileSize;
 
 //vvv object with array containing the tile data as strings
-let chessBoard = new Chessboard(columns, rows);
+let chessBoard = new Chessboard(length, height);
 
 //TESTER vvv
 // console.log(chessBoard);
@@ -35,7 +35,7 @@ function setup ()
 
     // initialize the grid squares
     //width is equal to the canvas width!
-    tileSize = width/rows; //ASSUMES SQUARE!!!
+    tileSize = width/height; //ASSUMES SQUARE!!!
 
     // background(255, 0, 200);
 }
@@ -43,6 +43,8 @@ function setup ()
 function draw() 
 {
     drawChessBoard();
+
+    drawPieceInHand();
 
     // background(255, 0, 200);
     // if (mouseIsPressed) {
@@ -52,8 +54,6 @@ function draw()
     // else {
     //   fill(255);
     // }
-
-
 
     // if (mouseIsPressed)
     // {
@@ -69,9 +69,10 @@ function drawChessBoard()
     let rectX;
     let rectY;
 
-    for (let i = 0; i < columns; i++)
+
+    for (let i = 0; i < length; i++)
     {
-        for (let j = 0; j < rows; j++)
+        for (let j = 0; j < height; j++)
         {
             //vvv x and y coordinates of current tile            
             rectX = j*tileSize;
@@ -96,6 +97,7 @@ function drawChessBoard()
             textAlign(CENTER);
             // vertAlign(CENTER);
 
+            //DRAW PIECES
             //X means empty tile, draw nothing!
             if (chessBoard[i][j] == "X")
             {
@@ -106,8 +108,8 @@ function drawChessBoard()
                 text(chessBoard[i][j], rectX, rectY, tileSize); //, tileSize, tileSize);
 
                 //DEBUG prints coords of each tile on the tile
-                // textSize(tileSize/2);
-                // text(i+" "+j, rectX, rectY, tileSize);
+                textSize(tileSize/2);
+                text(i+" "+j, rectX, rectY, tileSize);
             }
 
             
@@ -124,4 +126,81 @@ function isMouseOverTile (rx, ry, rw, rh)
         return true;
     }
     return false;
+}
+
+//if holdingToggle is true, begin holding
+let holdingToggle = false;
+let pieceInHand = "X";
+let preHoldChessBoard = [...chessBoard];
+//TESTER vvv
+console.log(preHoldChessBoard);
+
+function drawPieceInHand () 
+{
+
+
+    //the piece grabbing code! vvv
+    if (mouseIsPressed && mouseX >= 0 && mouseY >= 0)
+    // && mouseX < width && mouseY < height
+
+    {
+        //TESTER vvv mouse coords
+        // console.log("Mouse X: "+mouseX);
+        // console.log("Mouse Y: "+mouseY);
+
+        if (!holdingToggle)
+        {
+            holdingToggle = true;
+
+            pieceInHand = getPieceAtMouse();
+
+            // preHoldChessBoard = [...chessBoard];
+
+            // chessBoard[getColumnIndexAtMouse()][getRowIndexAtMouse()] = "X";
+        }
+    }
+    else if (mouseX >= 0 && mouseY >= 0) 
+    {
+        holdingToggle = false;
+        pieceInHand = "X";
+
+        //on let go, drop piece at mouse
+        // chessBoard[getColumnIndexAtMouse()][getRowIndexAtMouse()] = pieceInHand;
+    }
+    else
+    {
+        holdingToggle = false;
+        pieceInHand = "X";
+
+        // chessBoard = [...preHoldChessBoard];
+    }
+
+    if (pieceInHand != "X")
+    {
+        textSize(tileSize+10);
+        text(pieceInHand, mouseX, mouseY+10);
+    }
+}
+
+function getPieceAtMouse ()
+{
+    let columnIndex = getColumnIndexAtMouse();
+    let rowIndex = getRowIndexAtMouse();
+
+    let icon = chessBoard[rowIndex][columnIndex];
+
+    //TESTER vvv
+    console.log("Piece at coords = "+icon);
+    console.log("row: "+rowIndex);
+    console.log("column: "+columnIndex);
+
+    return icon;
+}
+function getColumnIndexAtMouse ()
+{
+    return Math.floor(mouseX / tileSize);
+}
+function getRowIndexAtMouse ()
+{
+    return Math.floor(mouseY / tileSize);
 }
