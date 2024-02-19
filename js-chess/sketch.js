@@ -3,8 +3,8 @@ let columns = 8;
 let rows = 8;
 let tileSize;
 
-//vvv array containing the tile data as strings
-let chessBoard = initializeBoard(columns, rows);
+//vvv object with array containing the tile data as strings
+let chessBoard = new Chessboard(columns, rows);
 
 //TESTER vvv
 // console.log(chessBoard);
@@ -42,6 +42,8 @@ function setup ()
 
 function draw() 
 {
+    drawChessBoard();
+
     // background(255, 0, 200);
     // if (mouseIsPressed) {
     //   fill(0);
@@ -51,7 +53,7 @@ function draw()
     //   fill(255);
     // }
 
-    drawChessBoard();
+
 
     // if (mouseIsPressed)
     // {
@@ -78,6 +80,7 @@ function drawChessBoard()
             //if mouse is hovering over tile, highlight tile black!
             if (isMouseOverTile(rectX, rectY, tileSize, tileSize))
             {
+                //highlight 
                 fill(0);
             }
             else 
@@ -102,7 +105,7 @@ function drawChessBoard()
             {
                 text(chessBoard[i][j], rectX, rectY, tileSize); //, tileSize, tileSize);
 
-                //DEBUG prints coords of each tile
+                //DEBUG prints coords of each tile on the tile
                 // textSize(tileSize/2);
                 // text(i+" "+j, rectX, rectY, tileSize);
             }

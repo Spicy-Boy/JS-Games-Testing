@@ -1,5 +1,5 @@
 
-function initializeBoard (height, length)
+function Chessboard (length, height)
 {
     //TESTER vvv
     console.log("INITIALIZING BOARD");
@@ -25,19 +25,17 @@ function initializeBoard (height, length)
     // let FENtoParse = initialFEN;
 
     //TEST FEN!!!
-    let FENtoParse = "rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R";
+    let FENtoParse = "PPPPPPPP/pp1ppQQQ/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R";
 
     for (let i = 0; i < boardHeight; i++)
     {
-        console.log("Hi!! New column!!!");
         //generates a fresh row
         let row = [];
         //populates the row accordng to length
         for (let j = 0; j < boardLength; j++)
         {
-            console.log("Hi!! New ROW?!!");
             //TESTER vvv
-            // console.log("Created piece @ "+i+" "+j+"!!!");
+            console.log("Created piece @ "+i+" "+j+"!!!");
 
             //vvvFEN reading begins here!!!
 
