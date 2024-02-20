@@ -1,5 +1,5 @@
 
-function Chessboard (length, height)
+function Chessboard (columns, rows)
 {
     //TESTER vvv
     console.log("INITIALIZING BOARD");
@@ -8,8 +8,8 @@ function Chessboard (length, height)
 
     //generally the length and height should always be 8...
     //instead of hardcoding, I am going to leave this open to change....
-    let boardLength = length;
-    let boardHeight = height;
+    let boardColumns = columns;
+    let boardRows = rows;
 
 
 
@@ -27,12 +27,12 @@ function Chessboard (length, height)
     //TEST FEN!!!
     let FENtoParse = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
-    for (let i = 0; i < boardHeight; i++)
+    for (let i = 0; i < boardColumns; i++)
     {
         //generates a fresh row
         let row = [];
         //populates the row accordng to length
-        for (let j = 0; j < boardLength; j++)
+        for (let j = 0; j < boardRows; j++)
         {
             //TESTER vvv
             console.log("Created piece @ "+i+" "+j+"!!!");

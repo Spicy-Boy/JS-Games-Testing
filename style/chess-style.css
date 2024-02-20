@@ -5,17 +5,33 @@ body {
 #wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    /* align-items: center; */
 
     background-color: rgb(255, 255, 255);
 
     padding: 2px;
     height: 80%;
 }
-#wrapper h3 {
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+main h3 {
     padding-bottom: 5px;
     margin: 0;
+}
+
+.wrapper-menus {
+    display: flex;
+    justify-content: space-between;
+}
+.menu-one {
+    background-color: red;
+    padding: 5px;
+    flex-basis: 33%;
+    
 }
 
 #canvas-holder {

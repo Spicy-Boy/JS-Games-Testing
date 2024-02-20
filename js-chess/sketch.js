@@ -83,15 +83,26 @@ function drawChessBoard()
             //simply sets the fill() to one color or other
             createCheckerboardPattern(i,j);
 
-            //if mouse is hovering over tile, highlight tile black!
+            //highlight tile that you are hovering over
             if (isMouseOverTile(rectX, rectY, tileSize, tileSize))
             {
-                //highlight black
-                fill(0);
+                //highlight lime green
+                fill(148, 239, 148);
             }
 
             //draw the tile square
+            //color is determined in createCheckerboardPattern
             rect(rectX, rectY, tileSize, tileSize);
+
+
+            //if mouse is hovering over tile, highlight tile black!
+            //UNUSED!
+            // if (isMouseOverTile(rectX, rectY, tileSize, tileSize))
+            // {
+            //     //highlight black
+            //     // fill(0);
+            //     drawTileSelecterOutline(rectX, rectY, tileSize, tileSize);
+            // }
 
             //draw the pieces associated with the current tile coordinate
             fill(235, 52, 52);
@@ -163,6 +174,26 @@ function isMouseOverTile (rx, ry, rw, rh)
         return true;
     }
     return false;
+}
+
+//UNUSED! and UNFINISHED
+function drawTileSelecterOutline (rx, ry, rLength, rHeight)
+{
+    //DRAW selector rectangles in the corner of the tile
+    fill(0);
+
+    let selectorThickness = 2;
+    let topRightCornerX = rx+rLength;
+    let bottomLeftCornerY = ry+rHeight;
+    let bottomRightCornerX = rx+rLength;
+    let bottomRightCornerY = ry+rHeight;
+
+
+    rect(rx, ry, rLength*.33, selectorThickness);
+    rect(rx, ry, selectorThickness, rHeight*.33);
+    
+    rect(topRightCornerX, ry, -rLength*.33, selectorThickness);
+    rect(topRightCornerX, ry, -selectorThickness, rHeight*.33);
 }
 
 //if holdingToggle is true, begin holding
