@@ -25,7 +25,7 @@ function Chessboard (length, height)
     // let FENtoParse = initialFEN;
 
     //TEST FEN!!!
-    let FENtoParse = "PPPPPPPP/pp1ppQQQ/8/2p5/6P1/5N2/PPPP1PPP/RNBQKB1R";
+    let FENtoParse = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
     for (let i = 0; i < boardHeight; i++)
     {
@@ -38,7 +38,6 @@ function Chessboard (length, height)
             console.log("Created piece @ "+i+" "+j+"!!!");
 
             //vvvFEN reading begins here!!!
-
 
             //SKIP slashes!! very important
             if (FENtoParse[indexOfFENTraversal] == "/")
