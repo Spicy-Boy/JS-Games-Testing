@@ -1,13 +1,18 @@
 //initialize size and shape of board
-let length = 8;
+let rowLength = 8;
 let columnHeight = 8;
 let tileSize;
 
 //vvv object with array containing the tile data as strings
-let chessBoard = new Chessboard(length, columnHeight);
+let chessBoard = new Chessboard(rowLength, columnHeight);
 
 let perspectiveWhite = false;
-let debugSpan = document.getElementById("current-perspective");
+let debugSpanPerspective = document.getElementById("current-perspective");
+
+
+let debugSpanInitialFEN = document.getElementById("initial-FEN");
+//vvv NOT SUPPOSED TO BE HARDCODED, read from chessBoard object!
+debugSpanInitialFEN.innerText = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
 //TESTER vvv
 // console.log(chessBoard);
@@ -42,8 +47,8 @@ function setup ()
 
     // background(255, 0, 200);
 
-
-    console.log(debugSpan);
+    //TESTER vvv for DOM element
+    // console.log(debugSpan);
 }
 
 function draw() 
@@ -77,15 +82,15 @@ function drawChessBoard()
 
     if (perspectiveWhite)
     {
-        debugSpan.innerText = "White";
+        debugSpanPerspective.innerText = "White";
     }
     else{
-        debugSpan.innerText = "Black";
+        debugSpanPerspective.innerText = "Black";
     }
 
     if (perspectiveWhite)
     {
-        for (let i = length-1; i >= 0; i--)
+        for (let i = rowLength-1; i >= 0; i--)
         {
             for (let j = 0; j < columnHeight; j++)
             {
@@ -114,7 +119,7 @@ function drawChessBoard()
                 textAlign(CENTER);
                 // vertAlign(CENTER);
 
-                adjustedJ = length - 1 - j;
+                adjustedJ = rowLength - 1 - j;
 
                 //DRAW PIECES
                 //X means empty tile, draw nothing!
@@ -138,7 +143,7 @@ function drawChessBoard()
     //IF BLACK PERSPECTIVE
     else 
     {
-        for (let i = 0; i < length; i++)
+        for (let i = 0; i < rowLength; i++)
         {
             for (let j = 0; j < columnHeight; j++)
             {
@@ -342,19 +347,36 @@ function getPieceAtMouse ()
 
     return icon;
 }
+//get the x value of the drawn board from 0 to 7 if dimensions 8x8
+//THIS FUNCTION IS MISNAMED!!! It gets the row index, which is technically which column actually...
+//Okay it is just confusing as hell, read the variable names
 function getColumnIndexAtMouse ()
 {
+    //HUGE TESTER vvv
+    // console.log("mouseX",mouseX);
+    // console.log("width",width);
+    // console.log("tileSize",tileSize);
+    // console.log("Coordinate calculated",Math.floor(mouseX / tileSize));
+
+    let whichColumn = Math.floor(mouseX / tileSize);
+
+    //when grabbing from white perspective it is necesary to find the opposite column to black because white perspective reverses the entire board! vvv
     if (perspectiveWhite)
     {
-        
+        let oppositeColumn = rowLength - 1 - whichColumn;
+        //TESTER vvv
+        // console.log("oppositeColumn",oppositeColumn);
+        return oppositeColumn;
     }
     else {
-        return Math.floor(mouseX / tileSize);
+        return whichColumn;
     }
 }
+//get the y value
 function getRowIndexAtMouse ()
 {
-    return Math.floor(mouseY / tileSize);
+    let whichRow = Math.floor(mouseY / tileSize);
+    return whichRow;
 }
 
 //this function returns a ChesspieceVector object that contains the x, y, and symbol data of a piece
@@ -369,6 +391,7 @@ function getPieceAtMouseAsVector()
 }
 
 //UNUSED! and UNFINISHED
+//looked ugly ;p
 function drawTileSelecterOutline (rx, ry, rLength, rHeight)
 {
     //DRAW selector rectangles in the corner of the tile

@@ -13,23 +13,27 @@
 
     <div id="wrapper">
 
-        <main>
             <h3>AARON'S CHESS GAME</h3>
-            <div class="wrapper-menus">
-                <section class="menu-one">
+            <div class="wrapper-chess-menus">
+                <section class="menu-one basis-33">
                     <button id="flip-board">Flip Board</button>
                     <h3>Perspective:<span id="current-perspective">???</span></h3>
                 </section>
+
                 <section class="wrapper-game">
                 
                     <div id="canvas-holder">
                         <!-- p5 canvas is put in here!! -->
                     </div>
                 </section>
-                <section class="menu-two">
+
+                <section class="menu-two basis-33">
+                    <h3>Initial FEN:<br><span id="initial-FEN">???</span></h3>
+                    <p>FEN stands for Forsyth-Edwards Notation. It is a code that represents all the positions on a given chess board configuration.</p>
                 </section>
-            </div>
-        </main>
+
+            </div> <!-- wrapper-chess-menus -->
+
     </div>
 
     <script src="js-chess/buttons.js"></script>

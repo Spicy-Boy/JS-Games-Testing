@@ -35,7 +35,7 @@ function Chessboard (columns, rows)
         for (let j = 0; j < boardRows; j++)
         {
             //TESTER vvv
-            console.log("Created piece @ "+i+" "+j+"!!!");
+            // console.log("Created piece @ "+i+" "+j+"!!!");
 
             //vvvFEN reading begins here!!!
 
@@ -122,7 +122,8 @@ function Chessboard (columns, rows)
                 FENtoParse = FENtoParse.substring(0, indexOfFENTraversal)+String(spanValue)+FENtoParse.substring(indexOfFENTraversal + 1);
 
                 row.push("X");
-                console.log("EMPTY!");
+                //TESTER vvv empty cell
+                // console.log("EMPTY!");
 
                 if (FENtoParse[indexOfFENTraversal] == "0")
                 {
@@ -149,13 +150,26 @@ function Chessboard (columns, rows)
         //fills each column with the filled out row
         chessBoard.push(row);
         //TESTER vvv
-        console.log("Pushed an entire row!!");
+        // console.log("Pushed an entire row!!");
 
     }
 
     console.log(chessBoard);
     return chessBoard;
 }
+
+//stub
+function createBoardFromFEN ()
+{
+
+}
+
+//stub
+function createFENOfBoard ()
+{
+
+}
+
 
 
 
