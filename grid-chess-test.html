@@ -7,11 +7,6 @@
     <title>Grid Test</title>
     <link rel="stylesheet" href="style/chess-style.css">
 
-    <script src ="js-chess/Chessboard.js"></script>
-    <script src ="js-chess/ChesspieceVector.js"></script>
-    <script src="js/p5.js"></script>
-    <script src="js-chess/sketch.js"></script>
-
 </head>
 
 <body>
@@ -23,6 +18,7 @@
             <div class="wrapper-menus">
                 <section class="menu-one">
                     <button id="flip-board">Flip Board</button>
+                    <h3>Perspective:<span id="current-perspective">???</span></h3>
                 </section>
                 <section class="wrapper-game">
                 
@@ -36,6 +32,12 @@
         </main>
     </div>
 
+    <script src="js-chess/buttons.js"></script>
+    
+    <script src="js/p5.js"></script>
+    <script src ="js-chess/Chessboard.js"></script>
+    <script src ="js-chess/ChesspieceVector.js"></script>
+    <script src="js-chess/sketch.js"></script>
 </body>
 
 </html>

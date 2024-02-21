@@ -6,6 +6,9 @@ let tileSize;
 //vvv object with array containing the tile data as strings
 let chessBoard = new Chessboard(length, columnHeight);
 
+let perspectiveWhite = false;
+let debugSpan = document.getElementById("current-perspective");
+
 //TESTER vvv
 // console.log(chessBoard);
 
@@ -38,6 +41,9 @@ function setup ()
     tileSize = width/columnHeight; //ASSUMES SQUARE!!!
 
     // background(255, 0, 200);
+
+
+    console.log(debugSpan);
 }
 
 function draw() 
@@ -65,69 +71,131 @@ function draw()
 
 function drawChessBoard()
 {
-
     // vvv the x and y of the individual board tiles
     let rectX;
     let rectY;
 
-
-    for (let i = 0; i < length; i++)
+    if (perspectiveWhite)
     {
-        for (let j = 0; j < columnHeight; j++)
+        debugSpan.innerText = "White";
+    }
+    else{
+        debugSpan.innerText = "Black";
+    }
+
+    if (perspectiveWhite)
+    {
+        for (let i = length-1; i >= 0; i--)
         {
-            //vvv x and y coordinates of current tile            
-            rectX = j*tileSize;
-            rectY = i*tileSize;
-
-            //this method contains a simple algorithm for setting the checkerboard colors based on the 2D array iteration
-            //simply sets the fill() to one color or other
-            createCheckerboardPattern(i,j);
-
-            //highlight tile that you are hovering over
-            if (isMouseOverTile(rectX, rectY, tileSize, tileSize))
+            for (let j = 0; j < columnHeight; j++)
             {
-                //highlight lime green
-                fill(148, 239, 148);
+                //vvv x and y coordinates of current tile            
+                rectX = j*tileSize;
+                rectY = i*tileSize;
+
+                //this method contains a simple algorithm for setting the checkerboard colors based on the 2D array iteration
+                //simply sets the fill() to one color or other
+                createCheckerboardPattern(i,j);
+
+                //highlight tile that you are hovering over
+                if (isMouseOverTile(rectX, rectY, tileSize, tileSize))
+                {
+                    //highlight lime green
+                    fill(148, 239, 148);
+                }
+
+                //draw the tile square
+                //color is determined in createCheckerboardPattern
+                rect(rectX, rectY, tileSize, tileSize);
+
+                //draw the pieces associated with the current tile coordinate
+                fill(235, 52, 52);
+                textSize(tileSize+10);
+                textAlign(CENTER);
+                // vertAlign(CENTER);
+
+                adjustedJ = length - 1 - j;
+
+                //DRAW PIECES
+                //X means empty tile, draw nothing!
+                if (chessBoard[i][adjustedJ] == "X")
+                {
+                    // text("", rectX, rectY, tileSize); //, tileSize, tileSize);
+                }
+                else 
+                {
+                    text(chessBoard[i][adjustedJ], rectX, rectY, tileSize); //, tileSize, tileSize);
+
+                    //DEBUG prints coords of each tile on the tile
+                    // textSize(tileSize/2);
+                    // text(i+" "+j, rectX, rectY, tileSize);
+                }
+
+                
             }
-
-            //draw the tile square
-            //color is determined in createCheckerboardPattern
-            rect(rectX, rectY, tileSize, tileSize);
-
-
-            //if mouse is hovering over tile, highlight tile black!
-            //UNUSED!
-            // if (isMouseOverTile(rectX, rectY, tileSize, tileSize))
-            // {
-            //     //highlight black
-            //     // fill(0);
-            //     drawTileSelecterOutline(rectX, rectY, tileSize, tileSize);
-            // }
-
-            //draw the pieces associated with the current tile coordinate
-            fill(235, 52, 52);
-            textSize(tileSize+10);
-            textAlign(CENTER);
-            // vertAlign(CENTER);
-
-            //DRAW PIECES
-            //X means empty tile, draw nothing!
-            if (chessBoard[i][j] == "X")
-            {
-                // text("", rectX, rectY, tileSize); //, tileSize, tileSize);
-            }
-            else 
-            {
-                text(chessBoard[i][j], rectX, rectY, tileSize); //, tileSize, tileSize);
-
-                //DEBUG prints coords of each tile on the tile
-                // textSize(tileSize/2);
-                // text(i+" "+j, rectX, rectY, tileSize);
-            }
-
-            
         }
     }
+    //IF BLACK PERSPECTIVE
+    else 
+    {
+        for (let i = 0; i < length; i++)
+        {
+            for (let j = 0; j < columnHeight; j++)
+            {
+                //vvv x and y coordinates of current tile            
+                rectX = j*tileSize;
+                rectY = i*tileSize;
+
+                //this method contains a simple algorithm for setting the checkerboard colors based on the 2D array iteration
+                //simply sets the fill() to one color or other
+                createCheckerboardPattern(i,j);
+
+                //highlight tile that you are hovering over
+                if (isMouseOverTile(rectX, rectY, tileSize, tileSize))
+                {
+                    //highlight lime green
+                    fill(148, 239, 148);
+                }
+
+                //draw the tile square
+                //color is determined in createCheckerboardPattern
+                rect(rectX, rectY, tileSize, tileSize);
+
+
+                //UNUSED! Tile selector brackets hovering over selection
+                // if (isMouseOverTile(rectX, rectY, tileSize, tileSize))
+                // {
+                //     //highlight black
+                //     // fill(0);
+                //     drawTileSelecterOutline(rectX, rectY, tileSize, tileSize);
+                // }
+
+                //draw the pieces associated with the current tile coordinate
+                fill(235, 52, 52);
+                textSize(tileSize+10);
+                textAlign(CENTER);
+                // vertAlign(CENTER);
+
+                //DRAW PIECES
+                //X means empty tile, draw nothing!
+                if (chessBoard[i][j] == "X")
+                {
+                    // text("", rectX, rectY, tileSize); //, tileSize, tileSize);
+                }
+                else 
+                {
+                    text(chessBoard[i][j], rectX, rectY, tileSize); //, tileSize, tileSize);
+
+                    //DEBUG prints coords of each tile on the tile
+                    // textSize(tileSize/2);
+                    // text(i+" "+j, rectX, rectY, tileSize);
+                }
+
+                
+            }
+        }
+    }
+
 }
 
 function createCheckerboardPattern(i, j)
@@ -176,26 +244,6 @@ function isMouseOverTile (rx, ry, rw, rh)
     return false;
 }
 
-//UNUSED! and UNFINISHED
-function drawTileSelecterOutline (rx, ry, rLength, rHeight)
-{
-    //DRAW selector rectangles in the corner of the tile
-    fill(0);
-
-    let selectorThickness = 2;
-    let topRightCornerX = rx+rLength;
-    let bottomLeftCornerY = ry+rHeight;
-    let bottomRightCornerX = rx+rLength;
-    let bottomRightCornerY = ry+rHeight;
-
-
-    rect(rx, ry, rLength*.33, selectorThickness);
-    rect(rx, ry, selectorThickness, rHeight*.33);
-    
-    rect(topRightCornerX, ry, -rLength*.33, selectorThickness);
-    rect(topRightCornerX, ry, -selectorThickness, rHeight*.33);
-}
-
 //if holdingToggle is true, begin holding
 let holdingToggle = false;
 let pieceInHand = "X";
@@ -221,7 +269,8 @@ function drawPieceInHand ()
             pieceInHand = getPieceAtMouse();
 
             //the board is changed to reflect the picking up of the selected piece
-            chessBoard[getRowIndexAtMouse()][getColumnIndexAtMouse()] = "X";          
+            chessBoard[getRowIndexAtMouse()][getColumnIndexAtMouse()] = "X";   
+       
         }
     }
     //if mouse let go over board, drop piece at position of mouse
@@ -295,7 +344,13 @@ function getPieceAtMouse ()
 }
 function getColumnIndexAtMouse ()
 {
-    return Math.floor(mouseX / tileSize);
+    if (perspectiveWhite)
+    {
+        
+    }
+    else {
+        return Math.floor(mouseX / tileSize);
+    }
 }
 function getRowIndexAtMouse ()
 {
@@ -311,4 +366,24 @@ function getPieceAtMouseAsVector()
     let y = getRowIndexAtMouse();
 
     return new ChesspieceVector(x, y, icon);
+}
+
+//UNUSED! and UNFINISHED
+function drawTileSelecterOutline (rx, ry, rLength, rHeight)
+{
+    //DRAW selector rectangles in the corner of the tile
+    fill(0);
+
+    let selectorThickness = 2;
+    let topRightCornerX = rx+rLength;
+    let bottomLeftCornerY = ry+rHeight;
+    let bottomRightCornerX = rx+rLength;
+    let bottomRightCornerY = ry+rHeight;
+
+
+    rect(rx, ry, rLength*.33, selectorThickness);
+    rect(rx, ry, selectorThickness, rHeight*.33);
+    
+    rect(topRightCornerX, ry, -rLength*.33, selectorThickness);
+    rect(topRightCornerX, ry, -selectorThickness, rHeight*.33);
 }
