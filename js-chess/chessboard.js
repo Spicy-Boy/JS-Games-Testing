@@ -1,4 +1,3 @@
-
 class Chessboard
 {
     // var object = 1;
@@ -16,14 +15,14 @@ class Chessboard
         //this is a FEN string representing the starting positions in chess!
         this.initialFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
-        // this.initializeBoard();
+        this.arrFEN = initialFEN;
     }
 
 
-    initializeBoard()
+    createBoardFromFEN (stringFEN)
     {
         //TESTER vvv FEN!!!
-        let FENtoParse = this.initialFEN;
+        let FENtoParse = stringFEN;
         // let FENtoParse = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
         // vv tracks empty portions of the FEN (represented by single numbers)
@@ -165,10 +164,10 @@ class Chessboard
     }
 
         //stub
-    createBoardFromFEN ()
-    {
-
-    }
+    // createBoardFromFEN (stringFEN)
+    // {
+    //     stringFEN 
+    // }
 
     //stub
     createFENOfBoard ()

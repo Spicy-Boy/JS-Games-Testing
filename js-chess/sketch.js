@@ -5,7 +5,7 @@ let tileSize;
 
 //vvv object with array containing the tile data as strings
 let chessBoard = new Chessboard(rowLength, columnHeight);
-chessBoard.initializeBoard();
+chessBoard.createBoardFromFEN(chessBoard.initialFEN);
 
 let perspectiveWhite = false;
 let debugSpanPerspective = document.getElementById("current-perspective");
