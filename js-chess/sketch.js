@@ -5,6 +5,7 @@ let tileSize;
 
 //vvv object with array containing the tile data as strings
 let chessBoard = new Chessboard(rowLength, columnHeight);
+chessBoard.initializeBoard();
 
 let perspectiveWhite = false;
 let debugSpanPerspective = document.getElementById("current-perspective");
@@ -123,13 +124,13 @@ function drawChessBoard()
 
                 //DRAW PIECES
                 //X means empty tile, draw nothing!
-                if (chessBoard[i][adjustedJ] == "X")
+                if (chessBoard.arr[i][adjustedJ] == "X")
                 {
                     // text("", rectX, rectY, tileSize); //, tileSize, tileSize);
                 }
                 else 
                 {
-                    text(chessBoard[i][adjustedJ], rectX, rectY, tileSize); //, tileSize, tileSize);
+                    text(chessBoard.arr[i][adjustedJ], rectX, rectY, tileSize); //, tileSize, tileSize);
 
                     //DEBUG prints coords of each tile on the tile
                     // textSize(tileSize/2);
@@ -183,13 +184,13 @@ function drawChessBoard()
 
                 //DRAW PIECES
                 //X means empty tile, draw nothing!
-                if (chessBoard[i][j] == "X")
+                if (chessBoard.arr[i][j] == "X")
                 {
                     // text("", rectX, rectY, tileSize); //, tileSize, tileSize);
                 }
                 else 
                 {
-                    text(chessBoard[i][j], rectX, rectY, tileSize); //, tileSize, tileSize);
+                    text(chessBoard.arr[i][j], rectX, rectY, tileSize); //, tileSize, tileSize);
 
                     //DEBUG prints coords of each tile on the tile
                     // textSize(tileSize/2);
@@ -274,7 +275,7 @@ function drawPieceInHand ()
             pieceInHand = getPieceAtMouse();
 
             //the board is changed to reflect the picking up of the selected piece
-            chessBoard[getRowIndexAtMouse()][getColumnIndexAtMouse()] = "X";   
+            chessBoard.arr[getRowIndexAtMouse()][getColumnIndexAtMouse()] = "X";   
        
         }
     }
@@ -284,7 +285,7 @@ function drawPieceInHand ()
     {
         holdingToggle = false;
 
-        chessBoard[getRowIndexAtMouse()][getColumnIndexAtMouse()] = pieceInHand;
+        chessBoard.arr[getRowIndexAtMouse()][getColumnIndexAtMouse()] = pieceInHand;
 
         pieceInHand = "X";
     }
@@ -301,7 +302,7 @@ function drawPieceInHand ()
         let oldIcon = preMovePiece.getIcon();
         // console.log(oldIcon);
 
-        chessBoard[oldCol][oldRow] = oldIcon;
+        chessBoard.arr[oldCol][oldRow] = oldIcon;
 
         pieceInHand = "X";
         //DO NOT draw if X is in hand
@@ -338,7 +339,7 @@ function getPieceAtMouse ()
     let columnIndex = getColumnIndexAtMouse();
     let rowIndex = getRowIndexAtMouse();
 
-    let icon = chessBoard[rowIndex][columnIndex];
+    let icon = chessBoard.arr[rowIndex][columnIndex];
 
     //TESTER vvv
     // console.log("Piece at coords = "+icon);

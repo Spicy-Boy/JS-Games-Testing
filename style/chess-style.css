@@ -54,6 +54,7 @@ body {
 }
 
 /* NOT MOBILE FIRST!!!! */
+/* phone users malding */
 @media screen and (max-width: 850px) {
     .wrapper-chess-menus {
         flex-direction: column;
