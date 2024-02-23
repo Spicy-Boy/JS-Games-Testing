@@ -15,7 +15,7 @@ class Chessboard
         //this is a FEN string representing the starting positions in chess!
         this.initialFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
-        this.arrFEN = initialFEN;
+        // this.arrFEN = initialFEN;
     }
 
 
@@ -163,16 +163,92 @@ class Chessboard
         // return chessBoard;
     }
 
-        //stub
-    // createBoardFromFEN (stringFEN)
-    // {
-    //     stringFEN 
-    // }
-
     //stub
     createFENOfBoard ()
     {
+        let stringFEN = "";
 
+        let emptyCounter = 0;
+
+        let indexOfSpan = 0;
+
+        let stringRow = "";
+
+        for (let i = 0; i < this.boardColumns; i++)
+        {
+
+            //populates the row accordng to length
+            for (let j = 0; j < this.boardRows; j++)
+            {
+
+
+                if (this.arr[i][j] != "X")
+                {
+                    if (this.arr[i][j] == "♖")
+                    {
+                        stringRow += "r";
+                    }
+                    else if (this.arr[i][j] == "♘")
+                    {
+                        stringRow += "n";
+                    }
+                    else if (this.arr[i][j] == "♗")
+                    {
+                        stringRow += "b";
+                    }
+                    else if (this.arr[i][j] == "♕")
+                    {
+                        stringRow += "q";
+                    }
+                    else if (this.arr[i][j] == "♔")
+                    {
+                        stringRow += "k";
+                    }
+                    else if (this.arr[i][j] == "♙")
+                    {
+                        stringRow += "p";
+                    }
+                    else if (this.arr[i][j] == "♜")
+                    {
+                        stringRow += "R";
+                    }
+                    else if (this.arr[i][j] == "♞")
+                    {
+                        stringRow += "N";
+                    }
+                    else if (this.arr[i][j] == "♝")
+                    {
+                        stringRow += "B";
+                    }
+                    else if (this.arr[i][j] == "♛")
+                    {
+                        stringRow += "Q";
+                    }
+                    else if (this.arr[i][j] == "♚")
+                    {
+                        stringRow += "K";
+                    }
+                    else if (this.arr[i][j] == "♟︎")
+                    {
+                        stringRow += "P";
+                    }
+                    
+                    // stringRow += this.arr[i][j];
+                }
+            }
+
+            //each line ends with a slash except the very last one
+            if(i != this.boardColumns - 1 && i != 0)
+            {
+                stringFEN += "/";
+            }
+
+            stringFEN += stringRow;
+            stringRow = "";
+
+        }
+
+        return stringFEN;
     }
 
     /* KEY:

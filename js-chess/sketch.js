@@ -10,10 +10,12 @@ chessBoard.createBoardFromFEN(chessBoard.initialFEN);
 let perspectiveWhite = false;
 let debugSpanPerspective = document.getElementById("current-perspective");
 
-
 let debugSpanInitialFEN = document.getElementById("initial-FEN");
 //vvv NOT SUPPOSED TO BE HARDCODED, read from chessBoard object!
-debugSpanInitialFEN.innerText = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+debugSpanInitialFEN.innerText = chessBoard.initialFEN;
+
+let debugSpanCurrentFEN = document.getElementById("current-FEN");
+debugSpanCurrentFEN.innerText = chessBoard.initialFEN;
 
 //TESTER vvv
 // console.log(chessBoard);
@@ -137,7 +139,6 @@ function drawChessBoard()
                     // text(i+" "+j, rectX, rectY, tileSize);
                 }
 
-                
             }
         }
     }
@@ -281,6 +282,7 @@ function drawPieceInHand ()
     }
     //if mouse let go over board, drop piece at position of mouse
     //overwrites existing piece
+    //piece snaps to hover tile, then save FEN data!
     else if (isMouseOverCanvas() && pieceInHand != "X") 
     {
         holdingToggle = false;
@@ -288,6 +290,10 @@ function drawPieceInHand ()
         chessBoard.arr[getRowIndexAtMouse()][getColumnIndexAtMouse()] = pieceInHand;
 
         pieceInHand = "X";
+
+        //update the FEN DOM with new data!
+        saveFENData();
+
     }
     //if mouse moves off board and let go, snaps piece back to where it was before being grabbed
     //memory of old piece is stored in preMovePiece as a ChesspieceVector object!
@@ -376,6 +382,7 @@ function getColumnIndexAtMouse ()
 //get the y value
 function getRowIndexAtMouse ()
 {
+
     let whichRow = Math.floor(mouseY / tileSize);
     return whichRow;
 }
@@ -389,6 +396,12 @@ function getPieceAtMouseAsVector()
     let y = getRowIndexAtMouse();
 
     return new ChesspieceVector(x, y, icon);
+}
+
+function saveFENData ()
+{
+    //update the menu GUI with latest information
+    debugSpanCurrentFEN.textContent = chessBoard.createFENOfBoard();
 }
 
 //UNUSED! and UNFINISHED
