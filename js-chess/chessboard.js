@@ -23,6 +23,7 @@ class Chessboard
     {
         //TESTER vvv FEN!!!
         let FENtoParse = stringFEN;
+        console.log(stringFEN);
         // let FENtoParse = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
 
         // vv tracks empty portions of the FEN (represented by single numbers)
@@ -159,7 +160,7 @@ class Chessboard
     
         }
     
-        console.log(chessBoard);
+        console.log(this.arr);
         // return chessBoard;
     }
 
@@ -181,9 +182,8 @@ class Chessboard
             for (let j = 0; j < this.boardRows; j++)
             {
 
-
-                if (this.arr[i][j] != "X")
-                {
+                // if (this.arr[i][j] != "X")
+                // {
                     if (this.arr[i][j] == "♖")
                     {
                         stringRow += "r";
@@ -232,21 +232,31 @@ class Chessboard
                     {
                         stringRow += "P";
                     }
+                    else if (this.arr[i][j] == "X")
+                    {
+                        stringRow+= "X";
+                    }
                     
                     // stringRow += this.arr[i][j];
-                }
+                // }
+
             }
 
             //each line ends with a slash except the very last one
-            if(i != this.boardColumns - 1 && i != 0)
-            {
-                stringFEN += "/";
-            }
+            stringRow += "/";
+
 
             stringFEN += stringRow;
             stringRow = "";
 
         }
+
+        //replace spans of X with single numbers vvv
+        stringFEN = stringFEN.replace(/X+/g, match => match.length);
+
+        stringFEN = stringFEN.split(""); //get rid of last /
+        stringFEN[stringFEN.length-1] = "";
+        stringFEN = stringFEN.join("");
 
         return stringFEN;
     }
