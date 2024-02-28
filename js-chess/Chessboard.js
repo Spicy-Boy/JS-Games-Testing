@@ -161,6 +161,11 @@ class Chessboard
             // console.log("Pushed an entire row!!");
     
         }
+
+        if (perspectiveWhite)
+        {
+            this.arr.reverse();
+        }
     
         console.log(this.arr);
         // return chessBoard;
@@ -253,12 +258,20 @@ class Chessboard
 
         }
 
-        //replace spans of X with single numbers vvv
+        //replace spans of X with single numbers vvv w/ Regex
         stringFEN = stringFEN.replace(/X+/g, match => match.length);
 
         stringFEN = stringFEN.split(""); //get rid of last /
         stringFEN[stringFEN.length-1] = "";
+        
+        //if white perspective, FEN is reversed and presented at the end of the string
+        if (perspectiveWhite)
+        {
+            stringFEN.reverse();
+        }
+
         stringFEN = stringFEN.join("");
+
 
         return stringFEN;
     }

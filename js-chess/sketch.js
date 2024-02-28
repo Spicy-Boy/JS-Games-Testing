@@ -3,15 +3,17 @@ let rowLength = 8;
 let columnHeight = 8;
 let tileSize;
 
+
+let perspectiveWhite = false;
+
 //vvv object with array containing the tile data as strings
 let chessBoard = new Chessboard(rowLength, columnHeight);
 chessBoard.createBoardFromFEN(chessBoard.initialFEN);
 
-let perspectiveWhite = false;
 let debugSpanPerspective = document.getElementById("current-perspective");
 
 let debugSpanInitialFEN = document.getElementById("initial-FEN");
-//vvv NOT SUPPOSED TO BE HARDCODED, read from chessBoard object!
+
 debugSpanInitialFEN.innerText = chessBoard.initialFEN;
 
 let debugSpanCurrentFEN = document.getElementById("current-FEN");
@@ -77,6 +79,9 @@ function draw()
     
 }
 
+// this toggle keeps track of whether or not the perspective has just changed. This way, if the player flips the board between black or white, the internal logic of the board will be updated consistently once per board flip vvv
+let whitePerspectiveToggle = false;
+
 function drawChessBoard()
 {
     // vvv the x and y of the individual board tiles
@@ -86,9 +91,24 @@ function drawChessBoard()
     if (perspectiveWhite)
     {
         debugSpanPerspective.innerText = "White";
+        // chessBoard.arr.reverse();
+
+        if (!whitePerspectiveToggle)
+        {
+            whitePerspectiveToggle = true;
+            //reverse the chessboard array to literally flip the board perspective... maybe not the best approach?
+            chessBoard.arr.reverse();
+        }
     }
     else{
         debugSpanPerspective.innerText = "Black";
+
+        if (whitePerspectiveToggle)
+        {
+            //reverse the chessboard array to literally flip the board perspective
+            whitePerspectiveToggle = false;
+            chessBoard.arr.reverse();
+        }
     }
 
     if (perspectiveWhite)

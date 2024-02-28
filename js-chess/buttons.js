@@ -1,7 +1,6 @@
 let flipButton = document.getElementById("flip-board");
 flipButton.addEventListener("click", function () {
     perspectiveWhite = !perspectiveWhite;
-    chessBoard.arr.reverse();
 });
 
 let generateBoardFromFenButton = document.getElementById("generate-board-from-FEN");
