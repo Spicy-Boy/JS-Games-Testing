@@ -9,7 +9,7 @@ let inputFEN = document.getElementById("input-FEN");
 
 generateBoardFromFenButton.addEventListener("click", function () {
 
-    // console.log("hi");
+    console.log("CREATING BOARD FROM FEN!");
     //check if is VALID FEN before firing?
     chessBoard.createBoardFromFEN(inputFEN.value);
 

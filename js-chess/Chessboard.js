@@ -22,9 +22,11 @@ class Chessboard
     createBoardFromFEN (stringFEN)
     {
         //TESTER vvv FEN!!!
+        // console.log(stringFEN);
         let FENtoParse = stringFEN;
-        console.log(stringFEN);
         // let FENtoParse = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+
+        this.arr = [];
 
         // vv tracks empty portions of the FEN (represented by single numbers)
         //example; in the initial FEN, 8 represents a row of 8 empty tiles
