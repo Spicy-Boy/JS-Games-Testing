@@ -23,7 +23,7 @@ body {
 .wrapper-chess-menus {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 }
 .menu-one {
     background-color: rgb(255, 204, 186);
@@ -59,12 +59,18 @@ body {
 /* NOT MOBILE FIRST!!!! */
 /* phone users malding */
 @media screen and (max-width: 1000px) {
+    :root {
+        --tile-size-modifier: 25;
+    }
+
+
     .wrapper-chess-menus {
         flex-direction: column;
     }
 
     .wrapper-game{
         order: -1;
+
     }
 /* 
     .menu-one {
