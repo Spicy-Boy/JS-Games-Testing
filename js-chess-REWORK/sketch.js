@@ -6,20 +6,25 @@
 
 */
 
-let canvasWidth = 300;
-let canvasHeight = 300;
 
-let chessBoardWidth = 250;
-let chessBoardHeight = 250;
-
-// vvv distance of chess board from origins (the left and top walls of canvas are the origins)
-let widthOriginToBoard = (canvasWidth - chessBoardWidth) / 2;
-let heightOriginToBoard = (canvasHeight - chessBoardHeight) / 2;
 
 let numberOfTilesPerRow = 8;
 let numberOfTilesPerCollumn = 8;
 //BASIC ASSUMPTION: All tiles are squares and therefor have the same width and height! 
-let tileSize = chessBoardWidth/numberOfTilesPerRow;
+
+let tileSize = 25;
+
+let chessBoardWidth = tileSize*numberOfTilesPerRow;
+let chessBoardHeight = tileSize*numberOfTilesPerCollumn;
+
+// let canvasWidth = 300;
+// let canvasHeight = 300;
+let canvasWidth = 100+chessBoardWidth;
+let canvasHeight = 100+chessBoardHeight;
+
+// vvv distance of chess board from origins (the left and top walls of canvas are the origins)
+let widthOriginToBoard = (canvasWidth - chessBoardWidth) / 2;
+let heightOriginToBoard = (canvasHeight - chessBoardHeight) / 2;
 
 function setup ()
 {
