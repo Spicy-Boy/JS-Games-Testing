@@ -30,9 +30,12 @@ body {
     /* padding: 5px; */
     /* flex-basis: 33%; */
 }
-
 .basis-33{
     flex-basis: 33%;
+}
+
+.wrapper-undo-buttons {
+    flex-direction: row;
 }
 
 .wrapper-game {

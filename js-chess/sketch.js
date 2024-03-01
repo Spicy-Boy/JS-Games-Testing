@@ -300,7 +300,7 @@ function drawPieceInHand ()
        
         }
     }
-    //if mouse let go over board, drop piece at position of mouse
+    //if mouse let go over board, drop/release piece at position of mouse
     //overwrites existing piece
     //piece snaps to hover tile, then save FEN data!
     else if (isMouseOverCanvas() && pieceInHand != "X") 
@@ -312,6 +312,7 @@ function drawPieceInHand ()
         pieceInHand = "X";
 
         //update the FEN DOM with new data!
+        //update the FEN timeline with new turn taken!
         saveFENData();
 
     }
@@ -420,8 +421,15 @@ function getPieceAtMouseAsVector()
 
 function saveFENData ()
 {
+
+    let newFEN = chessBoard.createFENOfBoard()
+
     //update the menu GUI with latest information
-    debugSpanCurrentFEN.textContent = chessBoard.createFENOfBoard();
+    debugSpanCurrentFEN.textContent = newFEN;
+
+    chessBoard.arrFENTimeline.push(newFEN);
+
+    chessBoard.chronoIndex++;
 }
 
 //UNUSED! and UNFINISHED

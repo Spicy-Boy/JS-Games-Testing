@@ -6,6 +6,8 @@ class Chessboard
         //vvv the array containing all board info
         this.arr = [];
 
+        this.arrFENTimeline = []; //this is an array of FEN strings
+
         //generally the length and height should always be 8...
         //instead of hardcoding, I am going to leave this open to change....
         this.boardColumns = columns;
@@ -14,6 +16,11 @@ class Chessboard
         //FEN means Forsyth-Edwards Notation
         //this is a FEN string representing the starting positions in chess!
         this.initialFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR";
+        this.arrFENTimeline.push(this.initialFEN);
+
+        //vvv chronoIndex saves the user's current position inside the chessBoard.arrFENTimeline array
+        //useful for traversing backwards and forwards through moves like a timeline with backward/forward buttons
+        this.chronoIndex = 0;
 
         // this.arrFEN = initialFEN;
     }
