@@ -29,12 +29,12 @@ class ChessBoard
         let indexOfFENTraversal = 0;
 
         //convert FEN symbols from string to unicode chess piece icons inside a 2D array of the board (this.arr)
-        for (let i = 0; i < this.columns; i++)
+        for (let i = 0; i < this.rows; i++)
         {
             //generates a fresh row
             let row = [];
             //populates the row accordng to length
-            for (let j = 0; j < this.rows; j++)
+            for (let j = 0; j < this.columns; j++)
             {
                 //TESTER vvv
                 // console.log("Created piece @ "+i+" "+j+"!!!");
@@ -140,7 +140,8 @@ class ChessBoard
             }
     
             //fills each column with the filled out row
-            this.arr.push(row);
+            // this.arr.push(row);
+            this.arr.unshift(row);
             //TESTER vvv
             // console.log("Pushed an entire row!!");
     
