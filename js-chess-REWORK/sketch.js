@@ -44,7 +44,8 @@ function setup ()
     var canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvas-holder');
 
-    // background(255, 0, 0);
+    //tester background
+    background(255, 0, 0);
 
     // const chessBoard = new ChessBoard();
 }
@@ -63,6 +64,9 @@ function draw ()
 // vvv draw chess board and its pieces, mouse hovering
 function drawChessBoard()
 {
+    //reset stroke to black
+    // noStroke();
+
     // vvv draw the board outline
     fill(255);
     rect(widthOriginToBoard,heightOriginToBoard,chessBoardWidth,chessBoardHeight);
@@ -93,11 +97,11 @@ function drawChessBoard()
             rect(tileX, tileY, tileSize, tileSize);
 
             //DEBUG prints coords of each tile on the tile
-            fill(0);
-            textSize(tileSize/2);
-            text(j+" "+i, tileX, tileY, tileSize);
+            // fill(0);
+            // textSize(tileSize/2);
+            // text(j+" "+i, tileX, tileY, tileSize);
 
-            drawWhitePiecesPerspectiveOnBoard(i,j);
+            drawWhitePerspectivePiecesOnBoard(i,j);
             // //DRAW PIECES
             // fill(235, 52, 52);
             // textSize(tileSize+10);
@@ -112,12 +116,26 @@ function drawChessBoard()
             // {
             //     text(chessBoard.arr[j][i], tileX, tileY, tileSize); //, tileSize, tileSize);
             // }
+
+            //Transparent border outline vvv
+            // fill(0, 0, 0, 0);
+            // rect(widthOriginToBoard, heightOriginToBoard, tileSize*numberOfTilesPerRow, tileSize*numberOfTilesPerCollumn);
+
+            //single lines!
+
         }
     }
+
+    stroke(  0 );
+    line(widthOriginToBoard, heightOriginToBoard+tileSize*numberOfTilesPerCollumn, widthOriginToBoard+tileSize*numberOfTilesPerRow, heightOriginToBoard+tileSize*numberOfTilesPerCollumn);
+
+    //TODO draw a white box beneath the board
+
 }
 
 //this loop could be melded with the "drawChessBoard" loop to save memory
 //HOWEVER, until I perfect the design, we are keeping them apart!!
+/* DEFUNCT AND UN OPERATIONAL RN, NOT IN USE vvvv*/
 function drawPiecesOnBoard()
 {
     //if white perspective, draw white pieces on bottom, black on top
@@ -131,7 +149,8 @@ function drawPiecesOnBoard()
         drawWhitePiecesPerspectiveOnBoard();
     }
 }
-function drawWhitePiecesPerspectiveOnBoard(i,j)
+//this is in use rn vvv to draw pieces
+function drawWhitePerspectivePiecesOnBoard(i,j)
 {
     
         // for (let i = 0; i < numberOfTilesPerCollumn; i++ )
@@ -146,6 +165,7 @@ function drawWhitePiecesPerspectiveOnBoard(i,j)
                     let tileY = heightOriginToBoard+(j*tileSize);
     
                     //DRAW PIECES
+                    noStroke();
                     fill(235, 52, 52);
                     textSize(tileSize+10);
                     textAlign(CENTER);
@@ -159,11 +179,14 @@ function drawWhitePiecesPerspectiveOnBoard(i,j)
                     {
                         text(chessBoard.arr[j][i], tileX, tileY, tileSize); //, tileSize, tileSize);
                     }
+
     
                     //DEBUG prints coords of each tile on the tile
                     // fill( 88, 24, 69 );
                     // textSize(tileSize/2);
                     // text(i+" "+j, tileX, tileY+15, tileSize);
+
+                    stroke(0);
     
             //     }
             // }
