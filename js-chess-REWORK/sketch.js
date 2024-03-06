@@ -12,12 +12,13 @@ let tileSize;
 if (window.matchMedia("(max-width: 1000px)").matches)
 {
     //mobile less than 1000px
-    tileSize = 25;
+    tileSize = 31.25;
 }
 else 
 {
     //desktop
-    tileSize = 45;
+    // tileSize = 45;
+    tileSize = 31.25;
 }
 
 
@@ -43,7 +44,7 @@ function setup ()
     var canvas = createCanvas(canvasWidth, canvasHeight);
     canvas.parent('canvas-holder');
 
-    background(255, 0, 0);
+    // background(255, 0, 0);
 
     // const chessBoard = new ChessBoard();
 }
@@ -54,9 +55,9 @@ function draw ()
     // vvv draw chess board and its pieces, mouse hovering
     drawChessBoard();
 
-    drawPiecesOnBoard();
+    // drawPiecesOnBoard();
 
-    drawPieceInHand();
+    // drawPieceInHand();
 }
 
 // vvv draw chess board and its pieces, mouse hovering
@@ -71,6 +72,9 @@ function drawChessBoard()
     {
         for (let j = 0; j < numberOfTilesPerRow; j++)
         {
+    // for (let i = numberOfTilesPerCollumn-1; i >= 0; i-- )
+    // {
+    //     for (let j = 0; j < numberOfTilesPerRow; j++)
             let tileX = widthOriginToBoard+(i*tileSize);
             let tileY = heightOriginToBoard+(j*tileSize);
 
@@ -92,6 +96,22 @@ function drawChessBoard()
             fill(0);
             textSize(tileSize/2);
             text(j+" "+i, tileX, tileY, tileSize);
+
+            drawWhitePiecesPerspectiveOnBoard(i,j);
+            // //DRAW PIECES
+            // fill(235, 52, 52);
+            // textSize(tileSize+10);
+            // textAlign(CENTER);
+            // //NOTE: i indicates column position, j indicates row position
+            // //as i increases, move downward, as j increases, move rightward (like WRITING)
+            // if (chessBoard.arr[j][i] == "X")
+            // {
+            //     // text("", rectX, rectY, tileSize); //, tileSize, tileSize);
+            // }
+            // else 
+            // {
+            //     text(chessBoard.arr[j][i], tileX, tileY, tileSize); //, tileSize, tileSize);
+            // }
         }
     }
 }
@@ -103,40 +123,52 @@ function drawPiecesOnBoard()
     //if white perspective, draw white pieces on bottom, black on top
     if (perspectiveWhite)
     {
+        drawWhitePiecesPerspectiveOnBoard();
 
-    for (let i = 0; i < numberOfTilesPerCollumn; i++ )
-    {
-        for (let j = 0; j < numberOfTilesPerRow; j++)
-        {
-
-            let tileX = widthOriginToBoard+(i*tileSize);
-            let tileY = heightOriginToBoard+(j*tileSize);
-
-            //DRAW PIECES
-            fill(235, 52, 52);
-            textSize(tileSize+10);
-            textAlign(CENTER);
-            //NOTE: i indicates column position, j indicates row position
-            //as i increases, move downward, as j increases, move rightward (like WRITING)
-            if (chessBoard.arr[j][i] == "X")
-            {
-                // text("", rectX, rectY, tileSize); //, tileSize, tileSize);
-            }
-            else 
-            {
-                text(chessBoard.arr[j][i], tileX, tileY, tileSize); //, tileSize, tileSize);
-            }
-
-            //DEBUG prints coords of each tile on the tile
-            // fill( 88, 24, 69 );
-            // textSize(tileSize/2);
-            // text(i+" "+j, tileX, tileY+15, tileSize);
-
-        }
     }
-
+    else 
+    {
+        drawWhitePiecesPerspectiveOnBoard();
     }
 }
+function drawWhitePiecesPerspectiveOnBoard(i,j)
+{
+    
+        // for (let i = 0; i < numberOfTilesPerCollumn; i++ )
+        // {
+        //     for (let j = 0; j < numberOfTilesPerRow; j++)
+        // //     {
+        //     for (let i = numberOfTilesPerCollumn-1; i >= 0; i-- )
+        //     {
+        //         for (let j = numberOfTilesPerCollumn-1; j >= 0; j--)
+        //         {
+                    let tileX = widthOriginToBoard+(i*tileSize);
+                    let tileY = heightOriginToBoard+(j*tileSize);
+    
+                    //DRAW PIECES
+                    fill(235, 52, 52);
+                    textSize(tileSize+10);
+                    textAlign(CENTER);
+                    //NOTE: i indicates column position, j indicates row position
+                    //as i increases, move downward, as j increases, move rightward (like WRITING)
+                    if (chessBoard.arr[j][i] == "X")
+                    {
+                        // text("", rectX, rectY, tileSize); //, tileSize, tileSize);
+                    }
+                    else 
+                    {
+                        text(chessBoard.arr[j][i], tileX, tileY, tileSize); //, tileSize, tileSize);
+                    }
+    
+                    //DEBUG prints coords of each tile on the tile
+                    // fill( 88, 24, 69 );
+                    // textSize(tileSize/2);
+                    // text(i+" "+j, tileX, tileY+15, tileSize);
+    
+            //     }
+            // }
+}
+
 
 //ty = relative tileX value, tY = relative tileY value dependent on position in board array iteration
 function isMouseOverTile(tX, tY)
@@ -189,7 +221,7 @@ function createCheckerboardPattern(i,j)
         else 
         {
             //white
-            fill (255);
+            fill (0);
         }
     }
     else

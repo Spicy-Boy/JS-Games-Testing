@@ -49,6 +49,7 @@ function setup ()
     // initialize the grid squares
     //width is equal to the canvas width!
     tileSize = width/columnHeight; //ASSUMES SQUARE!!!
+    console.log('tileSize',tileSize);
 
     // background(255, 0, 200);
 
